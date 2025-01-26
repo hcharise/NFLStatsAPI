@@ -23,6 +23,9 @@ namespace Project1
                     matchUpStat.printStats();
 
                 }
+            } else
+            {
+                Console.WriteLine("Unable to parse file from path.");
             }
         }
     }
