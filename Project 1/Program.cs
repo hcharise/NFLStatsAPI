@@ -1,34 +1,69 @@
 ﻿using System;
 using System.IO;
-using System.Text.Json;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Project1
 {
     class Program
     {
-        static async Task Main()
+        static void Main()
         {
-            Item item = await JsonFileReader.ReadAsync<Item>(@"C:\Users\hchar\OneDrive\Other\Desktop\team49ers_season2020_a.json");
+            // Read JSON content
+            string jsonContent = File.ReadAllText(@"C:\Users\hchar\OneDrive\Other\Desktop\team49ers_season2020_a.json");
+
+            // Deserialize to the Root class
+            var jsonFile = JsonConvert.DeserializeObject<Root>(jsonContent);
+
+            if (jsonFile != null && jsonFile.matchUpStats != null)
+            {
+                foreach (var matchUpStat in jsonFile.matchUpStats)
+                {
+                    Console.WriteLine($"Match Date: {matchUpStat.date}");
+                    Console.WriteLine($"\tHome Team: {matchUpStat.homeTeamName}, Score: {matchUpStat.homeStats?.score}");
+                    Console.WriteLine($"\tVisiting Team: {matchUpStat.visTeamName}, Score: {matchUpStat.visStats?.score}");
+                }
+            }
         }
     }
 
-    public static class JsonFileReader
+    public class Root
     {
-        public static async Task<T> ReadAsync<T>(string filePath)
-        {
-            using FileStream stream = File.OpenRead(filePath);
-            return await JsonSerializer.DeserializeAsync<T>(stream);
-        }
+        public List<MatchUpStats> matchUpStats { get; set; }
     }
 
-    public class Item
+    public class MatchUpStats
     {
-        public int millis;
-        public string stamp;
-        public DateTime datetime;
-        public string light;
-        public float temp;
-        public float vcc;
+        public bool neutral { get; set; }
+        public string visTeamName { get; set; }
+        public TeamStats visStats { get; set; }
+        public string homeTeamName { get; set; }
+        public TeamStats homeStats { get; set; }
+        public bool isFinal { get; set; }
+        public string date { get; set; }
+    }
+
+    public class TeamStats
+    {
+        public string statIdCode { get; set; }
+        public string gameCode { get; set; }
+        public int teamCode { get; set; }
+        public string gameDate { get; set; }
+        public int rushYds { get; set; }
+        public int rushAtt { get; set; }
+        public int passYds { get; set; }
+        public int passAtt { get; set; }
+        public int passComp { get; set; }
+        public int penalties { get; set; }
+        public int penaltYds { get; set; }
+        public int fumblesLost { get; set; }
+        public int interceptionsThrown { get; set; }
+        public int firstDowns { get; set; }
+        public int thridDownAtt { get; set; }
+        public int thirdDownConver { get; set; }
+        public int fourthDownAtt { get; set; }
+        public int fourthDownConver { get; set; }
+        public int timePoss { get; set; }
+        public int score { get; set; }
     }
 }
