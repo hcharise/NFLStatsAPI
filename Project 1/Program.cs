@@ -15,9 +15,8 @@ using Newtonsoft.Json;
 
 
 // TO DOS:
-//  - Any other unexpected inputs? can't load file, can't parse/doesn't fit into objects, can't find search one?
 //  - Add menu - enter JSON URL & deserialize, print out all, query specific game
-//  - Add querying - change to dictionary? search by game date?
+//  - Add querying - change to dictionary? search by game date? can't find in search
 //  - Add comments - adequately detailed module operations and maintenance history as well as function prologue, annotated throughout
 //  - Check that methods are less than 50 lines each
 //  - Create documentation - model of classes and relationships
@@ -29,24 +28,44 @@ namespace Project1
     {
         public static async Task Main()
         {
-            string url = "https://sports.snoozle.net/search/nfl/searchHandler?fileType=inline&statType=teamStats&season=2020&teamName=26";
+
+            Console.WriteLine("Welcome to the NFL Game Stats Processor!\n");
+            Console.WriteLine("Paste the URL at which I can access the json file:");
+            string url = Console.ReadLine();
+
+            //string url = "https://sports.snoozle.net/search/nfl/searchHandler?fileType=inline&statType=teamStats&season=2020&teamName=26";
             JsonHandler jsonHandler = new JsonHandler();
             Root jsonFile = await jsonHandler.FetchAndDeserializeJson(url);
 
-            if (jsonFile != null && jsonFile.matchUpStats != null)
-            {
-                foreach (var matchUpStat in jsonFile.matchUpStats)
-                {
-                    matchUpStat.printStats();
+            Console.WriteLine("\nStats retrieved successfully!");
+            Console.WriteLine("Choose an option by entering the number:");
+            Console.WriteLine("\t1. Print stats from all games.");
+            Console.WriteLine("\t2. Print stats from a specific game.");
 
-                }
-            }
-            else
+            string menuChoice = Console.ReadLine();
+            int menuChoiceInt;
+            if (int.TryParse(menuChoice, out menuChoiceInt))
             {
-                Console.WriteLine("Unable to parse file from path.");
+                switch (menuChoiceInt)
+                {
+                    case 1:
+                        Console.WriteLine("Here are all the stats!\n");
+                        foreach (var matchUpStat in jsonFile.matchUpStats)
+                        {
+                            matchUpStat.printStats();
+                        }
+                        break;
+                    case 2:
+                        Console.WriteLine("Which game's stats would you like to see?");
+                        break;
+                    default:
+                        Console.WriteLine("Not a valid menu choice.");
+                        break;
+                }
+            } else
+            {
+                Console.WriteLine("Not a valid menu choice.");
             }
         }
-
-        
     }
 }
