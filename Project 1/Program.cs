@@ -37,34 +37,61 @@ namespace Project1
             JsonHandler jsonHandler = new JsonHandler();
             Root jsonFile = await jsonHandler.FetchAndDeserializeJson(url);
 
+            // Add way to re-enter URL if an exception was thrown? while loop?
+
             Console.WriteLine("\nStats retrieved successfully!");
             Console.WriteLine("Choose an option by entering the number:");
             Console.WriteLine("\t1. Print stats from all games.");
-            Console.WriteLine("\t2. Print stats from a specific game.");
+            Console.WriteLine("\t2. Print stats from a specific game (1 - {0}).", jsonFile.matchUpStats.Count + 1);
+            Console.WriteLine("\t3. Exit the NFL Game Stats Processor.");
 
             string menuChoice = Console.ReadLine();
-            int menuChoiceInt;
-            if (int.TryParse(menuChoice, out menuChoiceInt))
+            while (menuChoice != "3")
             {
-                switch (menuChoiceInt)
+                int menuChoiceInt;
+                if (int.TryParse(menuChoice, out menuChoiceInt))
                 {
-                    case 1:
-                        Console.WriteLine("Here are all the stats!\n");
-                        foreach (var matchUpStat in jsonFile.matchUpStats)
-                        {
-                            matchUpStat.printStats();
-                        }
-                        break;
-                    case 2:
-                        Console.WriteLine("Which game's stats would you like to see?");
-                        break;
-                    default:
-                        Console.WriteLine("Not a valid menu choice.");
-                        break;
+                    switch (menuChoiceInt)
+                    {
+                        case 1:
+                            Console.WriteLine("Here are all the stats!\n");
+                            foreach (var matchUpStat in jsonFile.matchUpStats)
+                            {
+                                matchUpStat.printStats();
+                            }
+                            break;
+                        case 2:
+                            Console.WriteLine("Enter the game number that you would like to view.");
+                            menuChoice = Console.ReadLine();
+                            if (int.TryParse(menuChoice, out menuChoiceInt))
+                            {
+                                if (menuChoiceInt > 0 && menuChoiceInt > jsonFile.matchUpStats.Count) {
+                                    jsonFile.matchUpStats[menuChoiceInt - 1].printStats();
+                                } else
+                                {
+                                    Console.WriteLine("Number must be between 1 and {0}.", jsonFile.matchUpStats.Count + 1);
+                                }
+                            } else
+                            {
+                                Console.WriteLine("Must be a number.");
+                            }
+                            break;
+                        default:
+                            Console.WriteLine("Not a valid menu choice.");
+                            break;
+                    }
                 }
-            } else
-            {
-                Console.WriteLine("Not a valid menu choice.");
+                else
+                {
+                    Console.WriteLine("Not a valid menu choice.");
+                }
+
+                Console.WriteLine("Choose an option by entering the number:");
+                Console.WriteLine("\t1. Print stats from all games.");
+                Console.WriteLine("\t2. Print stats from a specific game (1 - {0}).", jsonFile.matchUpStats.Count + 1);
+                Console.WriteLine("\t3. Exit the NFL Game Stats Processor.");
+
+                menuChoice = Console.ReadLine();
             }
         }
     }
