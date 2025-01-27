@@ -19,6 +19,7 @@ using System.Numerics;
 //  - Add comments - adequately detailed module operations and maintenance history as well as function prologue, annotated throughout
 //  - Check that methods are less than 50 lines each
 //  - Create documentation - model of classes and relationships
+//  - Rename Root and put all json handling into json package?
 
 namespace Project1
 {

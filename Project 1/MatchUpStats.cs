@@ -13,11 +13,11 @@ public class MatchUpStats
     {
         string strFormat;
 
-        strFormat = String.Format($"Match Date: {date}");
+        strFormat = String.Format("{0,-11}{1, 11}", "Match Date:", date);
         Console.WriteLine(strFormat);
-        strFormat = String.Format($"Final? {isFinal}");
+        strFormat = String.Format("{0,-11}{1, 11}", "Final?", isFinal);
         Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,-22} {1,22}|{2,22}|", $"Neutral? {neutral}", $"Home: {homeTeamName}", $"Visiting: {visTeamName}");
+        strFormat = String.Format("{0,-11}{1, 11} {2,22}|{3,22}|", "Neutral? ",neutral, $"Home: {homeTeamName}", $"Visiting: {visTeamName}");
         Console.WriteLine(strFormat);
         Console.WriteLine($"---------------------------------------------------------------------");
         strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "statIdCode", homeStats?.statIdCode, visStats?.statIdCode);
