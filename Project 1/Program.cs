@@ -15,12 +15,11 @@ using Newtonsoft.Json;
 
 
 // TO DOS:
-//  - Add menu - enter JSON URL & deserialize, print out all, query specific game
-//  - Add querying - change to dictionary? search by game date? can't find in search
+//  - Rename Root and put all json handling into json package? - may already be done?
+//  - Clean up code - methods to print menu, handle menu options?, print intro message, tasks in each of the switch statements
 //  - Add comments - adequately detailed module operations and maintenance history as well as function prologue, annotated throughout
 //  - Check that methods are less than 50 lines each
 //  - Create documentation - model of classes and relationships
-//  - Rename Root and put all json handling into json package?
 
 namespace Project1
 {
