@@ -1,4 +1,10 @@
-﻿public class TeamStats
+﻿/// <summary>
+/// Represents the statistical performance of a single team in a game.
+/// This class includes data such as passing yards, rushing yards, penalties,
+/// turnovers, and other key performance metrics.
+/// </summary>
+
+public class TeamStats
 {
     public string statIdCode { get; set; }
     public string gameCode { get; set; }

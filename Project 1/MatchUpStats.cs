@@ -1,4 +1,10 @@
-﻿public class MatchUpStats
+﻿/// <summary>
+/// Represents the statistics for a single matchup between two teams.
+/// This class holds details about the game, including team names, final score,
+/// and various in-game statistics for both home and visiting teams.
+/// </summary>
+
+public class MatchUpStats
 {
     public bool neutral { get; set; }
     public string visTeamName { get; set; }
@@ -7,59 +13,58 @@
     public TeamStats homeStats { get; set; }
     public bool isFinal { get; set; }
     public string date { get; set; }
+
+
+    // Prints formatted statistics for the matchup, displaying various in-game metrics
+    // for both the home and visiting teams.
     public void printStats()
     {
         string strFormat;
 
+        Console.WriteLine($"Game Statistics - {homeTeamName} vs. {visTeamName}");
+
         strFormat = String.Format("{0,-11}{1, 11}", "Match Date:", date);
         Console.WriteLine(strFormat);
+
         strFormat = String.Format("{0,-11}{1, 11}", "Final?", isFinal);
         Console.WriteLine(strFormat);
+
         strFormat = String.Format("{0,-11}{1, 11} {2,22}|{3,22}|", "Neutral? ", neutral, $"Home: {homeTeamName}", $"Visiting: {visTeamName}");
         Console.WriteLine(strFormat);
+
         Console.WriteLine($"---------------------------------------------------------------------");
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "statIdCode", homeStats?.statIdCode, visStats?.statIdCode);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "gameCode", homeStats?.gameCode, visStats?.gameCode);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "teamCode", homeStats?.teamCode, visStats?.teamCode);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "gameDate", homeStats?.gameDate, visStats?.gameDate);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "rushYds", homeStats?.rushYds, visStats?.rushYds);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "rushAtt", homeStats?.rushAtt, visStats?.rushAtt);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "passYds", homeStats?.passYds, visStats?.passYds);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "passAtt", homeStats?.passAtt, visStats?.passAtt);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "passComp", homeStats?.passComp, visStats?.passComp);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "penalties", homeStats?.penalties, visStats?.penalties);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "penaltYds", homeStats?.penaltYds, visStats?.penaltYds);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "fumblesLost", homeStats?.fumblesLost, visStats?.fumblesLost);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "interceptionsThrown", homeStats?.interceptionsThrown, visStats?.interceptionsThrown);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "firstDowns", homeStats?.firstDowns, visStats?.firstDowns);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "thirdDownAtt", homeStats?.thridDownAtt, visStats?.thridDownAtt);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "thirdDownConver", homeStats?.thirdDownConver, visStats?.thirdDownConver);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "fourthDownAtt", homeStats?.fourthDownAtt, visStats?.fourthDownAtt);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "fourthDownConver", homeStats?.fourthDownConver, visStats?.fourthDownConver);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "timePoss", homeStats?.timePoss, visStats?.timePoss);
-        Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "score", homeStats?.score, visStats?.score);
-        Console.WriteLine(strFormat);
+
+        // Print various game statistics
+        PrintStatRow("statIdCode", homeStats?.statIdCode, visStats?.statIdCode);
+        PrintStatRow("gameCode", homeStats?.gameCode, visStats?.gameCode);
+        PrintStatRow("teamCode", homeStats?.teamCode, visStats?.teamCode);
+        PrintStatRow("gameDate", homeStats?.gameDate, visStats?.gameDate);
+        PrintStatRow("rushYds", homeStats?.rushYds, visStats?.rushYds);
+        PrintStatRow("rushAtt", homeStats?.rushAtt, visStats?.rushAtt);
+        PrintStatRow("passYds", homeStats?.passYds, visStats?.passYds);
+        PrintStatRow("passAtt", homeStats?.passAtt, visStats?.passAtt);
+        PrintStatRow("passComp", homeStats?.passComp, visStats?.passComp);
+        PrintStatRow("penalties", homeStats?.penalties, visStats?.penalties);
+        PrintStatRow("penaltYds", homeStats?.penaltYds, visStats?.penaltYds);
+        PrintStatRow("fumblesLost", homeStats?.fumblesLost, visStats?.fumblesLost);
+        PrintStatRow("interceptionsThrown", homeStats?.interceptionsThrown, visStats?.interceptionsThrown);
+        PrintStatRow("firstDowns", homeStats?.firstDowns, visStats?.firstDowns);
+        PrintStatRow("thirdDownAtt", homeStats?.thridDownAtt, visStats?.thridDownAtt);
+        PrintStatRow("thirdDownConver", homeStats?.thirdDownConver, visStats?.thirdDownConver);
+        PrintStatRow("fourthDownAtt", homeStats?.fourthDownAtt, visStats?.fourthDownAtt);
+        PrintStatRow("fourthDownConver", homeStats?.fourthDownConver, visStats?.fourthDownConver);
+        PrintStatRow("timePoss", homeStats?.timePoss, visStats?.timePoss);
+        PrintStatRow("score", homeStats?.score, visStats?.score);
 
         Console.WriteLine("---------------------------------------------------------------------");
         Console.WriteLine();
     }
+
+    // Helper method to print a formatted row for a specific statistic.
+    private void PrintStatRow(string statName, object homeValue, object visValue)
+    {
+        string strFormat = String.Format("{0,22}|{1,22}|{2,22}|", statName, homeValue ?? "N/A", visValue ?? "N/A");
+        Console.WriteLine(strFormat);
+    }
+
 }

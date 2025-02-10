@@ -1,4 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿/// <summary>
+/// Handles fetching and deserializing JSON data from a given URL.
+/// This class is responsible for making HTTP requests, validating responses,
+/// and converting JSON into C# objects for further processing.
+/// </summary>
+
+using Newtonsoft.Json;
 
 public class JsonHandler
 {

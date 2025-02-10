@@ -1,17 +1,24 @@
-﻿using System;
+﻿/// <summary>
+/// Manages user interactions with the command-line menu.
+/// This class is responsible for displaying menu options, processing user input, 
+/// and executing corresponding actions such as loading and displaying game statistics.
+/// </summary>
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 public class MenuHandler
 {
-    private readonly JsonHandler _jsonHandler;
-    private GameStatsCollection _jsonFile;
+    private readonly JsonHandler _jsonHandler; // Handles fetching and deserializing JSON data.
+    private GameStatsCollection _jsonFile; // Stores the deserialized game statistics.
 
+    // Initializes a new instance of the <see cref="MenuHandler"/> class.
     public MenuHandler(JsonHandler jsonHandler)
     {
         _jsonHandler = jsonHandler;
     }
 
+    // Prompts the user to enter a URL, fetches JSON data from it, and deserializes it into a <see cref="GameStatsCollection"/> object.
     public async Task LoadJsonData()
     {
         while (true)
@@ -23,7 +30,7 @@ public class MenuHandler
             {
                 _jsonFile = await _jsonHandler.FetchAndDeserializeJson(url);
                 Console.WriteLine("\nStats retrieved successfully!");
-                break;
+                break; // Exit loop upon successful data retrieval.
             }
             catch (Exception ex)
             {
@@ -33,6 +40,7 @@ public class MenuHandler
         }
     }
 
+    /// Displays the main menu and handles user input to navigate between options.
     public void ShowMenu()
     {
         while (true)
@@ -44,12 +52,14 @@ public class MenuHandler
 
             string input = Console.ReadLine();
 
+            // Validate user input
             if (!int.TryParse(input, out int choice))
             {
                 Console.WriteLine("Invalid input. Please enter a number.");
                 continue;
             }
 
+            // Process the user's choice
             switch (choice)
             {
                 case 1:
@@ -60,7 +70,7 @@ public class MenuHandler
                     break;
                 case 3:
                     Console.WriteLine("Exiting the program...");
-                    return;
+                    return; // Exit the method, terminating the loop and the program.
                 default:
                     Console.WriteLine("Not a valid menu choice.");
                     break;
@@ -68,6 +78,7 @@ public class MenuHandler
         }
     }
 
+    /// Prints statistics for all available matchups.
     private void PrintAllStats()
     {
         Console.WriteLine("Here are all the stats!\n");
@@ -77,6 +88,7 @@ public class MenuHandler
         }
     }
 
+    /// Prompts the user to enter a specific game number and prints the corresponding statistics.
     private void PrintSpecificGameStats()
     {
         Console.WriteLine("Enter the game number that you would like to view:");
