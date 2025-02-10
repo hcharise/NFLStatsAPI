@@ -26,7 +26,7 @@ namespace Project1
             Console.WriteLine("\nStats retrieved successfully!");
             Console.WriteLine("Choose an option by entering the number:");
             Console.WriteLine("\t1. Print stats from all games.");
-            Console.WriteLine("\t2. Print stats from a specific game (1 - {0}).", jsonFile.matchUpStats.Count + 1);
+            Console.WriteLine("\t2. Print stats from a specific game (1 - {0}).", jsonFile.matchUpStats.Count);
             Console.WriteLine("\t3. Exit the NFL Game Stats Processor.");
 
             string menuChoice = Console.ReadLine();
@@ -49,13 +49,14 @@ namespace Project1
                             menuChoice = Console.ReadLine();
                             if (int.TryParse(menuChoice, out menuChoiceInt))
                             {
-                                if (menuChoiceInt > 0 && menuChoiceInt > jsonFile.matchUpStats.Count)
+                                if (menuChoiceInt > 0 && menuChoiceInt <= jsonFile.matchUpStats.Count)
                                 {
+                                    Console.WriteLine("Here are the stats from game {0}!\n", menuChoiceInt);
                                     jsonFile.matchUpStats[menuChoiceInt - 1].printStats();
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Number must be between 1 and {0}.", jsonFile.matchUpStats.Count + 1);
+                                    Console.WriteLine("Number must be between 1 and {0}.", jsonFile.matchUpStats.Count);
                                 }
                             }
                             else
@@ -75,7 +76,7 @@ namespace Project1
 
                 Console.WriteLine("Choose an option by entering the number:");
                 Console.WriteLine("\t1. Print stats from all games.");
-                Console.WriteLine("\t2. Print stats from a specific game (1 - {0}).", jsonFile.matchUpStats.Count + 1);
+                Console.WriteLine("\t2. Print stats from a specific game (1 - {0}).", jsonFile.matchUpStats.Count);
                 Console.WriteLine("\t3. Exit the NFL Game Stats Processor.");
 
                 menuChoice = Console.ReadLine();
