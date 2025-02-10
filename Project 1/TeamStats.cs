@@ -1,6 +1,4 @@
-﻿using Project1;
-
-public class TeamStats
+﻿public class TeamStats
 {
     public string statIdCode { get; set; }
     public string gameCode { get; set; }

@@ -1,20 +1,4 @@
-﻿using System;
-using System.IO;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using System.Numerics;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
-// Question on Requirement 3 - Shall support generating a new JSON object
-// and adding to an existing object to create a more complex object hierarchy
-// ^^ Does this mean we need to actually add another object?
-//    Or just be in a list format that could in theory take another object?
-
-
-// TO DOS:
+﻿// TO DOS:
 //  - Rename Root and put all json handling into json package? - may already be done?
 //  - Clean up code - methods to print menu, handle menu options?, print intro message, tasks in each of the switch statements
 //  - Any other error/unexpected input that might need to be handled? give option to re-enter URL?
@@ -33,7 +17,7 @@ namespace Project1
             Console.WriteLine("Paste the URL at which I can access the json file:");
             string url = Console.ReadLine();
 
-            //string url = "https://sports.snoozle.net/search/nfl/searchHandler?fileType=inline&statType=teamStats&season=2020&teamName=26";
+            // string url = "https://sports.snoozle.net/search/nfl/searchHandler?fileType=inline&statType=teamStats&season=2020&teamName=26";
             JsonHandler jsonHandler = new JsonHandler();
             Root jsonFile = await jsonHandler.FetchAndDeserializeJson(url);
 
@@ -65,13 +49,16 @@ namespace Project1
                             menuChoice = Console.ReadLine();
                             if (int.TryParse(menuChoice, out menuChoiceInt))
                             {
-                                if (menuChoiceInt > 0 && menuChoiceInt > jsonFile.matchUpStats.Count) {
+                                if (menuChoiceInt > 0 && menuChoiceInt > jsonFile.matchUpStats.Count)
+                                {
                                     jsonFile.matchUpStats[menuChoiceInt - 1].printStats();
-                                } else
+                                }
+                                else
                                 {
                                     Console.WriteLine("Number must be between 1 and {0}.", jsonFile.matchUpStats.Count + 1);
                                 }
-                            } else
+                            }
+                            else
                             {
                                 Console.WriteLine("Must be a number.");
                             }

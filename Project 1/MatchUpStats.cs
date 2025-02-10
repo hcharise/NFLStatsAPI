@@ -1,6 +1,4 @@
-﻿using Project1;
-
-public class MatchUpStats
+﻿public class MatchUpStats
 {
     public bool neutral { get; set; }
     public string visTeamName { get; set; }
@@ -17,7 +15,7 @@ public class MatchUpStats
         Console.WriteLine(strFormat);
         strFormat = String.Format("{0,-11}{1, 11}", "Final?", isFinal);
         Console.WriteLine(strFormat);
-        strFormat = String.Format("{0,-11}{1, 11} {2,22}|{3,22}|", "Neutral? ",neutral, $"Home: {homeTeamName}", $"Visiting: {visTeamName}");
+        strFormat = String.Format("{0,-11}{1, 11} {2,22}|{3,22}|", "Neutral? ", neutral, $"Home: {homeTeamName}", $"Visiting: {visTeamName}");
         Console.WriteLine(strFormat);
         Console.WriteLine($"---------------------------------------------------------------------");
         strFormat = String.Format("{0,22}|{1,22}|{2,22}|", "statIdCode", homeStats?.statIdCode, visStats?.statIdCode);
