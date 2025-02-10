@@ -2,7 +2,7 @@
 
 public class JsonHandler
 {
-    public async Task<Root> FetchAndDeserializeJson(string url)
+    public async Task<GameStatsCollection> FetchAndDeserializeJson(string url)
     {
         try
         {
@@ -28,7 +28,7 @@ public class JsonHandler
                 }
 
                 // Deserialize the JSON into the Root object
-                return JsonConvert.DeserializeObject<Root>(jsonContent);
+                return JsonConvert.DeserializeObject<GameStatsCollection>(jsonContent);
             }
         }
         catch (HttpRequestException ex)
