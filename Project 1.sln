@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35521.163 d17.12
+VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project 1", "Project 1\Project 1.csproj", "{7FD29EFD-07E2-4D2D-AA63-9FB2F094343D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFLStatsAPI", "Project 1\NFLStatsAPI.csproj", "{7FD29EFD-07E2-4D2D-AA63-9FB2F094343D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
