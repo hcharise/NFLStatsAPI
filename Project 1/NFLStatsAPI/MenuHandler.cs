@@ -3,9 +3,11 @@
 /// This class is responsible for displaying menu options, processing user input, 
 /// and executing corresponding actions such as loading and displaying game statistics.
 /// </summary>
+using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 public class MenuHandler
 {
@@ -21,22 +23,18 @@ public class MenuHandler
     // Prompts the user to enter a URL, fetches JSON data from it, and deserializes it into a <see cref="GameStatsCollection"/> object.
     public async Task LoadJsonData()
     {
-        while (true)
-        {
-            Console.WriteLine("Paste the URL at which I can access the JSON file:");
-            string url = Console.ReadLine();
+        // may want to pass this in as parameter from loop?
+        string url = "https://sports.snoozle.net/search/nfl/searchHandler?fileType=inline&statType=teamStats&season=2020&teamName=26";
+        Console.WriteLine($"Accessing URL: {url}");
 
-            try
-            {
-                _jsonFile = await _jsonHandler.FetchAndDeserializeJson(url);
-                Console.WriteLine("\nStats retrieved successfully!");
-                break; // Exit loop upon successful data retrieval.
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-                Console.WriteLine("Please try entering the URL again.");
-            }
+        try
+        {
+            _jsonFile = await _jsonHandler.FetchAndDeserializeJson(url);
+            Console.WriteLine("\nStats retrieved successfully!");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
         }
     }
 
