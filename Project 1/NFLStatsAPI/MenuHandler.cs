@@ -51,15 +51,6 @@ public class MenuHandler
     //    }
     //}
 
-    ///// Prints statistics for all available matchups.
-    //private void PrintAllStats()
-    //{
-    //    Console.WriteLine("Here are all the stats!\n");
-    //    foreach (var matchUpStat in _jsonFile.MatchUpStats)
-    //    {
-    //        matchUpStat.printStats();
-    //    }
-    //}
 
     ///// Prompts the user to enter a specific game number and prints the corresponding statistics.
     //private void PrintSpecificGameStats()

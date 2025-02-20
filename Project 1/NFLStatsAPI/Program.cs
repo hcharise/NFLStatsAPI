@@ -55,6 +55,7 @@ class Program
         TeamGamesThisSeason teamA = new TeamGamesThisSeason(jsonHandler, teamNum);
 
         await teamA.LoadJsonData();
+        teamA.PrintAllStats();
 
         //// Initialize the menu handler, which manages user interactions
         //MenuHandler menuHandler = new MenuHandler(jsonHandler);

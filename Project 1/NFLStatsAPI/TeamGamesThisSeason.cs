@@ -35,4 +35,15 @@ public class TeamGamesThisSeason
             Console.WriteLine($"Error: {ex.Message}");
         }
     }
+
+
+    /// Prints statistics for all available matchups.
+    public void PrintAllStats()
+    {
+        Console.WriteLine($"Here are all the stats for team {_teamNum} this season!\n");
+        foreach (var matchUpStat in _jsonFile.MatchUpStats)
+        {
+            matchUpStat.printStats();
+        }
+    }
 }
