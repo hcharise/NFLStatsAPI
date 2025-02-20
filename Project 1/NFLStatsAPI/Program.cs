@@ -49,11 +49,15 @@ class Program
         // Initialize the JSON handler, responsible for fetching and deserializing data
         JsonHandler jsonHandler = new JsonHandler();
 
-        TeamGamesThisSeason teamA = new TeamGamesThisSeason(jsonHandler, 5); // change back from 5!!
+        // Array to hold all team's full stats for the current season
+        TeamGamesThisSeason[] allTeamsThisSeason = new TeamGamesThisSeason[32];
 
-        await teamA.LoadJsonData();
-
-
+        // Load each team's full stats from URL/Json into array of objects
+        for (int i = 0; i < 32; i++)
+        {
+            allTeamsThisSeason[i] = new TeamGamesThisSeason(jsonHandler, i);
+            await allTeamsThisSeason[i].LoadJsonData();
+        }
 
         MenuHandler mainMenu = new MenuHandler();
 
@@ -64,10 +68,10 @@ class Program
         switch (mainMenu.getMenuChoice())
         {
             case 1:
-                teamA.PrintAllStats();
+                allTeamsThisSeason[1].PrintAllStats();
                 break;
             case 2:
-                teamA.PrintSpecificGameStats();
+                allTeamsThisSeason[1].PrintSpecificGameStats();
                 break;
             case 3:
                 Console.WriteLine("Exiting the program...");
