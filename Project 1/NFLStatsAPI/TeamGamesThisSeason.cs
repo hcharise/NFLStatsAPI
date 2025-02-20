@@ -10,6 +10,7 @@ public class TeamGamesThisSeason
     private readonly JsonHandler _jsonHandler; // Handles fetching and deserializing JSON data.
     private TeamGamesThisSeason _jsonFile; // Stores the deserialized game statistics.
     private int _teamNum;
+    public string teamName;
 
     // Initializes a new instance of the <see cref="MenuHandler"/> class.
     public TeamGamesThisSeason(JsonHandler jsonHandler, int teamNum)
@@ -33,6 +34,8 @@ public class TeamGamesThisSeason
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
+
+        setTeamName();
     }
 
 
@@ -83,8 +86,26 @@ public class TeamGamesThisSeason
             }
         }
 
-        string strFormat = String.Format("{0,5}:{1,3} -{2,3} -{3,3}", _teamNum, wins, losses, ties);
+        string strFormat = String.Format("{0,2}.{1,10}:{2,3} -{3,3} -{4,3}", _teamNum, teamName, wins, losses, ties);
         Console.WriteLine(strFormat);
+    }
+
+    private void setTeamName()
+    {
+        if (_jsonFile.MatchUpStats[0].homeTeamName == _jsonFile.MatchUpStats[1].homeTeamName)
+        {
+            teamName = _jsonFile.MatchUpStats[0].homeTeamName;
+        } else if (_jsonFile.MatchUpStats[0].homeTeamName == _jsonFile.MatchUpStats[1].visTeamName)
+        {
+            teamName = _jsonFile.MatchUpStats[0].homeTeamName;
+        } else if (_jsonFile.MatchUpStats[0].visTeamName == _jsonFile.MatchUpStats[1].homeTeamName)
+        {
+            teamName = _jsonFile.MatchUpStats[0].visTeamName;
+        } else if (_jsonFile.MatchUpStats[0].visTeamName == _jsonFile.MatchUpStats[1].visTeamName)
+        {
+            teamName = _jsonFile.MatchUpStats[0].visTeamName;
+        }
+
     }
 }
 

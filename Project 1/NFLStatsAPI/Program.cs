@@ -11,18 +11,7 @@
 /// 
 /// 
 /// TO DO:
-///  - Modify URL taker so that it can pull all 32 games
-///         (for (1-32) {
-///             get URL[i] (concat?)
-///             then print team's name & number
-///             for (all games in their season) {
-///                 if win count as win; if loss count as loss; if tie count as tie
-///             }
-///             print out record
-///         }
 ///  - Add a message queue implementation to regulate the requests going to your server
-///  - Modify output to print out teams’ names, associated team number, and their season records
-///  - Add for loop to count team's records
 ///  - Update capitalization to be consistent
 ///  - Update // to /// or vice versa
 ///  - Add notes above about phase 2 changes

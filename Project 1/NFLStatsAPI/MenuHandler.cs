@@ -57,9 +57,9 @@ public class MenuHandler
     public void printRecordHeading()
     {
         Console.WriteLine("Printing records for each team this season.\n"); // would be cool to figure out which team is which number?
-        string strFormat = String.Format("{0,5}:{1,3} -{2,3} -{3,3}", "TEAM", "W", "L", "T");
+        string strFormat = String.Format("{0,13}:{1,3} -{2,3} -{3,3}", "TEAM", "W", "L", "T");
         Console.WriteLine(strFormat);
-        Console.WriteLine("-------------------");
+        Console.WriteLine("---------------------------");
 
     }
 }
