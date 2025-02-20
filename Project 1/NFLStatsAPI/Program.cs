@@ -24,6 +24,7 @@
 ///  - Modify output to print out teams’ names, associated team number, and their season records
 ///  - Add for loop to count team's records
 ///  - Update capitalization to be consistent
+///  - Update // to /// or vice versa
 ///  - Add notes above about phase 2 changes
 ///  - Update/redo documentation - add a diagram that shows context? try to use C4 model?, where is message queue & how does it work
 ///  - Figure out why teams are numbered the way they are?
@@ -55,7 +56,7 @@ class Program
         // Load each team's full stats from URL/Json into array of objects
         for (int i = 0; i < 32; i++)
         {
-            allTeamsThisSeason[i] = new TeamGamesThisSeason(jsonHandler, i);
+            allTeamsThisSeason[i] = new TeamGamesThisSeason(jsonHandler, i + 1);
             await allTeamsThisSeason[i].LoadJsonData();
         }
 
@@ -65,7 +66,7 @@ class Program
         mainMenu.ShowMenu();
         int menuChoice = mainMenu.getMenuChoice();
 
-        while (menuChoice != 3)
+        while (menuChoice != 0)
         {
             // Do the user's choice
             switch (menuChoice)
@@ -77,6 +78,11 @@ class Program
                     allTeamsThisSeason[mainMenu.getTeamNum()].PrintSpecificGameStats();
                     break;
                 case 3:
+                    mainMenu.printRecordHeading();
+                    for (int i = 0; i < 32; i++)
+                    {
+                        allTeamsThisSeason[i].PrintTeamRecord();
+                    }
                     break;
                 default:
                     Console.WriteLine("Not a valid menu choice.");

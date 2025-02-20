@@ -20,7 +20,7 @@ public class MenuHandler
         Console.WriteLine("\t1. Print stats from all games.");
         Console.WriteLine("\t2. Print stats from a specific game.");
         Console.WriteLine("\t3. Exit the NFL Game Stats Processor.");
-    }
+    } // need to modify
 
     public int getMenuChoice()
     {
@@ -52,6 +52,15 @@ public class MenuHandler
             strInput = Console.ReadLine();
         }
         return intOutput;
+
+    }
+
+    public void printRecordHeading()
+    {
+        Console.WriteLine("Printing records for each team this season.\n"); // would be cool to figure out which team is which number?
+        string strFormat = String.Format("{0,5}:{1,3} -{2,3} -{3,3}", "TEAM", "W", "L", "T");
+        Console.WriteLine(strFormat);
+        Console.WriteLine("-------------------");
 
     }
 }

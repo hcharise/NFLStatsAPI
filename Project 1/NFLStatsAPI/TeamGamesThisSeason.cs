@@ -46,8 +46,6 @@ public class TeamGamesThisSeason
         }
     }
 
-
-
     /// Prompts the user to enter a specific game number and prints the corresponding statistics.
     public void PrintSpecificGameStats()
     {
@@ -64,4 +62,30 @@ public class TeamGamesThisSeason
             Console.WriteLine("Invalid game number. Please enter a number between 1 and {0}.", _jsonFile.MatchUpStats.Count);
         }
     }
+
+    public void PrintTeamRecord()
+    {
+        int wins = 0;
+        int losses = 0;
+        int ties = 0;
+
+        foreach (GameStats game in _jsonFile.MatchUpStats)
+        {
+            if (game.homeStats.score > game.visStats.score)
+            {
+                wins++;
+            } else if (game.visStats.score > game.homeStats.score)
+            {
+                losses++;
+            } else
+            {
+                ties++;
+            }
+        }
+
+        string strFormat = String.Format("{0,5}:{1,3} -{2,3} -{3,3}", _teamNum, wins, losses, ties);
+        Console.WriteLine(strFormat);
+    }
 }
+
+
