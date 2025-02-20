@@ -27,9 +27,12 @@ public class MenuHandler
         string input = Console.ReadLine();
         int choice = convertAndValidateInt(input);
 
+        // check here that it's within bounds?
+
         return choice;
     }
 
+    // use convert and validate, also check that it's within bounds?
     public int getTeamNum()
     {
         Console.WriteLine("Enter the team number.\n");

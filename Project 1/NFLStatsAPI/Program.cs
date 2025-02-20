@@ -59,27 +59,36 @@ class Program
             await allTeamsThisSeason[i].LoadJsonData();
         }
 
+        // add while loop
         MenuHandler mainMenu = new MenuHandler();
 
         mainMenu.ShowMenu();
-              
+        int menuChoice = mainMenu.getMenuChoice();
 
-        // Process the user's choice
-        switch (mainMenu.getMenuChoice())
+        while (menuChoice != 3)
         {
-            case 1:
-                allTeamsThisSeason[1].PrintAllStats();
-                break;
-            case 2:
-                allTeamsThisSeason[1].PrintSpecificGameStats();
-                break;
-            case 3:
-                Console.WriteLine("Exiting the program...");
-                return; // Exit the method, terminating the loop and the program.
-            default:
-                Console.WriteLine("Not a valid menu choice.");
-                break;
+            // Do the user's choice
+            switch (menuChoice)
+            {
+                case 1:
+                    allTeamsThisSeason[mainMenu.getTeamNum()].PrintAllStats();
+                    break;
+                case 2:
+                    allTeamsThisSeason[mainMenu.getTeamNum()].PrintSpecificGameStats();
+                    break;
+                case 3:
+                    break;
+                default:
+                    Console.WriteLine("Not a valid menu choice.");
+                    break;
+            }
+
+            mainMenu.ShowMenu();
+            menuChoice = mainMenu.getMenuChoice();
+
         }
 
+        Console.WriteLine("Exiting the program...");
+        return; // Exit the program
     }
 }
