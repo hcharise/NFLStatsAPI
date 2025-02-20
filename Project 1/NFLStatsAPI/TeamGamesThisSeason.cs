@@ -46,4 +46,23 @@ public class TeamGamesThisSeason
             matchUpStat.printStats();
         }
     }
+
+
+
+    /// Prompts the user to enter a specific game number and prints the corresponding statistics.
+    public void PrintSpecificGameStats()
+    {
+        Console.WriteLine("Enter the game number that you would like to view:");
+        string input = Console.ReadLine();
+
+        if (int.TryParse(input, out int gameNum) && gameNum > 0 && gameNum <= _jsonFile.MatchUpStats.Count)
+        {
+            Console.WriteLine($"Here are the stats for team {_teamNum} from game {gameNum}!\n", gameNum);
+            _jsonFile.MatchUpStats[gameNum - 1].printStats();
+        }
+        else
+        {
+            Console.WriteLine("Invalid game number. Please enter a number between 1 and {0}.", _jsonFile.MatchUpStats.Count);
+        }
+    }
 }

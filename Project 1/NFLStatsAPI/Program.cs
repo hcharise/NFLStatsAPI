@@ -56,6 +56,7 @@ class Program
 
         await teamA.LoadJsonData();
         teamA.PrintAllStats();
+        teamA.PrintSpecificGameStats();
 
         //// Initialize the menu handler, which manages user interactions
         //MenuHandler menuHandler = new MenuHandler(jsonHandler);
