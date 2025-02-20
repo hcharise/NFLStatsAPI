@@ -23,6 +23,7 @@
 ///  - Add a message queue implementation to regulate the requests going to your server
 ///  - Modify output to print out teams’ names, associated team number, and their season records
 ///  - Add for loop to count team's records
+///  - Update capitalization to be consistent
 ///  - Add notes above about phase 2 changes
 ///  - Update/redo documentation - add a diagram that shows context? try to use C4 model?, where is message queue & how does it work
 ///  - Figure out why teams are numbered the way they are?
@@ -59,29 +60,24 @@ class Program
         MenuHandler mainMenu = new MenuHandler();
 
         mainMenu.ShowMenu();
-        Console.WriteLine($"Menu Choice is {mainMenu.getMenuChoice()}.");
-
-        teamA.PrintAllStats();
-        teamA.PrintSpecificGameStats();
-
-
+        // Console.WriteLine($"Menu Choice is {mainMenu.getMenuChoice()}.");
 
         // Process the user's choice
-        //switch (choice)
-        //{
-        //    case 1:
-        //        PrintAllStats();
-        //        break;
-        //    case 2:
-        //        PrintSpecificGameStats();
-        //        break;
-        //    case 3:
-        //        Console.WriteLine("Exiting the program...");
-        //        return; // Exit the method, terminating the loop and the program.
-        //    default:
-        //        Console.WriteLine("Not a valid menu choice.");
-        //        break;
-        //}
+        switch (mainMenu.getMenuChoice())
+        {
+            case 1:
+                teamA.PrintAllStats();
+                break;
+            case 2:
+                teamA.PrintSpecificGameStats();
+                break;
+            case 3:
+                Console.WriteLine("Exiting the program...");
+                return; // Exit the method, terminating the loop and the program.
+            default:
+                Console.WriteLine("Not a valid menu choice.");
+                break;
+        }
 
         //// Initialize the menu handler, which manages user interactions
         //MenuHandler menuHandler = new MenuHandler(jsonHandler);
