@@ -27,7 +27,7 @@ public class TeamGamesThisSeason
         try
         {
             _jsonFile = await _jsonHandler.FetchAndDeserializeJson(URL);
-            Console.WriteLine("\nStats retrieved successfully!");
+            Console.WriteLine("Stats retrieved successfully!\n");
         }
         catch (Exception ex)
         {
