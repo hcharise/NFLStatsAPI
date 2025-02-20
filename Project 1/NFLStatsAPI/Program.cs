@@ -48,7 +48,7 @@ class Program
         // Initialize the JSON handler, responsible for fetching and deserializing data
         JsonHandler jsonHandler = new JsonHandler();
 
-        TeamGamesThisSeason teamA = new TeamGamesThisSeason(jsonHandler);
+        TeamGamesThisSeason teamA = new TeamGamesThisSeason(jsonHandler, 26);
 
         await teamA.LoadJsonData();
 
