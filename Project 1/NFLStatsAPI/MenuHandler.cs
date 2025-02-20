@@ -17,18 +17,17 @@ public class MenuHandler
     public void ShowMenu()
     {
         Console.WriteLine("\nChoose an option by entering the number:");
-        Console.WriteLine("\t1. Print stats from all games.");
-        Console.WriteLine("\t2. Print stats from a specific game.");
-        Console.WriteLine("\t3. Exit the NFL Game Stats Processor.");
+        Console.WriteLine("\t1. Print records from all teams this season.");
+        Console.WriteLine("\t2. Print one team's stats from all games this season.");
+        Console.WriteLine("\t3. Print one team's stats from one game this season.");
+        Console.WriteLine("\t0. Exit the NFL Game Stats Processor.");
     } // need to modify
 
     public int getMenuChoice()
     {
         string input = Console.ReadLine();
         int choice = convertAndValidateInt(input);
-
-        // check here that it's within bounds?
-
+        
         return choice;
     }
 

@@ -72,17 +72,17 @@ class Program
             switch (menuChoice)
             {
                 case 1:
-                    allTeamsThisSeason[mainMenu.getTeamNum()].PrintAllStats();
-                    break;
-                case 2:
-                    allTeamsThisSeason[mainMenu.getTeamNum()].PrintSpecificGameStats();
-                    break;
-                case 3:
                     mainMenu.printRecordHeading();
                     for (int i = 0; i < 32; i++)
                     {
                         allTeamsThisSeason[i].PrintTeamRecord();
                     }
+                    break; 
+                case 2:
+                    allTeamsThisSeason[mainMenu.getTeamNum()].PrintAllStats();
+                    break; 
+                case 3:
+                    allTeamsThisSeason[mainMenu.getTeamNum()].PrintSpecificGameStats();
                     break;
                 default:
                     Console.WriteLine("Not a valid menu choice.");
