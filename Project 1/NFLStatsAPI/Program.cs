@@ -48,13 +48,17 @@ class Program
         // Initialize the JSON handler, responsible for fetching and deserializing data
         JsonHandler jsonHandler = new JsonHandler();
 
-        // Initialize the menu handler, which manages user interactions
-        MenuHandler menuHandler = new MenuHandler(jsonHandler);
+        TeamGamesThisSeason teamA = new TeamGamesThisSeason(jsonHandler);
 
-        // Load game statistics from a JSON source provided by the user
-        await menuHandler.LoadJsonData();
+        await teamA.LoadJsonData();
 
-        // Display the menu and process user input
-        menuHandler.ShowMenu();
+        //// Initialize the menu handler, which manages user interactions
+        //MenuHandler menuHandler = new MenuHandler(jsonHandler);
+
+        //// Load game statistics from a JSON source provided by the user
+        //await menuHandler.LoadJsonData();
+
+        //// Display the menu and process user input
+        //menuHandler.ShowMenu();
     }
 }
