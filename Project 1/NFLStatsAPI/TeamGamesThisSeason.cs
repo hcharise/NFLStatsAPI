@@ -3,7 +3,7 @@
 /// This class acts as a wrapper for multiple `MatchUpStats` instances.
 /// </summary>
 
-public class GameStatsCollection
+public class TeamGamesThisSeason
 {
-    public List<MatchUpStats> MatchUpStats { get; set; }
+    public List<GameStats> MatchUpStats { get; set; }
 }

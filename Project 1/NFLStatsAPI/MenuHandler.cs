@@ -12,7 +12,7 @@ using static System.Net.WebRequestMethods;
 public class MenuHandler
 {
     private readonly JsonHandler _jsonHandler; // Handles fetching and deserializing JSON data.
-    private GameStatsCollection _jsonFile; // Stores the deserialized game statistics.
+    private TeamGamesThisSeason _jsonFile; // Stores the deserialized game statistics.
 
     // Initializes a new instance of the <see cref="MenuHandler"/> class.
     public MenuHandler(JsonHandler jsonHandler)

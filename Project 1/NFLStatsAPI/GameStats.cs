@@ -4,13 +4,13 @@
 /// and various in-game statistics for both home and visiting teams.
 /// </summary>
 
-public class MatchUpStats
+public class GameStats
 {
     public bool neutral { get; set; }
     public string visTeamName { get; set; }
-    public TeamStats visStats { get; set; }
+    public TeamStatsThisGame visStats { get; set; }
     public string homeTeamName { get; set; }
-    public TeamStats homeStats { get; set; }
+    public TeamStatsThisGame homeStats { get; set; }
     public bool isFinal { get; set; }
     public string date { get; set; }
 

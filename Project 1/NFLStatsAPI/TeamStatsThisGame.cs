@@ -4,7 +4,7 @@
 /// turnovers, and other key performance metrics.
 /// </summary>
 
-public class TeamStats
+public class TeamStatsThisGame
 {
     public string statIdCode { get; set; }
     public string gameCode { get; set; }
