@@ -7,7 +7,6 @@ public class TeamGamesThisSeason
 {
     public List<GameStats> MatchUpStats { get; set; }
     private const string URLBase = "https://sports.snoozle.net/search/nfl/searchHandler?fileType=inline&statType=teamStats&season=2020&teamName=";
-
     private readonly JsonHandler _jsonHandler; // Handles fetching and deserializing JSON data.
     private TeamGamesThisSeason _jsonFile; // Stores the deserialized game statistics.
     private int _teamNum;

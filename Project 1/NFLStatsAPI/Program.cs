@@ -55,8 +55,33 @@ class Program
         TeamGamesThisSeason teamA = new TeamGamesThisSeason(jsonHandler, teamNum);
 
         await teamA.LoadJsonData();
+
+        MenuHandler mainMenu = new MenuHandler();
+
+        mainMenu.ShowMenu();
+        Console.WriteLine($"Menu Choice is {mainMenu.getMenuChoice()}.");
+
         teamA.PrintAllStats();
         teamA.PrintSpecificGameStats();
+
+
+
+        // Process the user's choice
+        //switch (choice)
+        //{
+        //    case 1:
+        //        PrintAllStats();
+        //        break;
+        //    case 2:
+        //        PrintSpecificGameStats();
+        //        break;
+        //    case 3:
+        //        Console.WriteLine("Exiting the program...");
+        //        return; // Exit the method, terminating the loop and the program.
+        //    default:
+        //        Console.WriteLine("Not a valid menu choice.");
+        //        break;
+        //}
 
         //// Initialize the menu handler, which manages user interactions
         //MenuHandler menuHandler = new MenuHandler(jsonHandler);
