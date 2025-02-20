@@ -49,18 +49,16 @@ class Program
         // Initialize the JSON handler, responsible for fetching and deserializing data
         JsonHandler jsonHandler = new JsonHandler();
 
-        Console.WriteLine("Enter the team number.\n");
-        string input = Console.ReadLine();
-        int.TryParse(input, out int teamNum);
-
-        TeamGamesThisSeason teamA = new TeamGamesThisSeason(jsonHandler, teamNum);
+        TeamGamesThisSeason teamA = new TeamGamesThisSeason(jsonHandler, 5); // change back from 5!!
 
         await teamA.LoadJsonData();
+
+
 
         MenuHandler mainMenu = new MenuHandler();
 
         mainMenu.ShowMenu();
-        // Console.WriteLine($"Menu Choice is {mainMenu.getMenuChoice()}.");
+              
 
         // Process the user's choice
         switch (mainMenu.getMenuChoice())
@@ -79,13 +77,5 @@ class Program
                 break;
         }
 
-        //// Initialize the menu handler, which manages user interactions
-        //MenuHandler menuHandler = new MenuHandler(jsonHandler);
-
-        //// Load game statistics from a JSON source provided by the user
-        //await menuHandler.LoadJsonData();
-
-        //// Display the menu and process user input
-        //menuHandler.ShowMenu();
     }
 }

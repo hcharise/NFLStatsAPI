@@ -25,16 +25,30 @@ public class MenuHandler
     public int getMenuChoice()
     {
         string input = Console.ReadLine();
-        int choice;
-
-        // Validate user input
-        while (!int.TryParse(input, out choice))
-        {
-            Console.WriteLine("Invalid input. Please enter a number.");
-            input = Console.ReadLine();
-        }
+        int choice = convertAndValidateInt(input);
 
         return choice;
     }
 
+    public int getTeamNum()
+    {
+        Console.WriteLine("Enter the team number.\n");
+        string input = Console.ReadLine();
+        int.TryParse(input, out int teamNum);
+        return teamNum;
+    }
+
+    private int convertAndValidateInt(string strInput)
+    {
+        int intOutput;
+
+        // Validate user input
+        while (!int.TryParse(strInput, out intOutput))
+        {
+            Console.WriteLine("Invalid input. Please enter a integer.");
+            strInput = Console.ReadLine();
+        }
+        return intOutput;
+
+    }
 }
