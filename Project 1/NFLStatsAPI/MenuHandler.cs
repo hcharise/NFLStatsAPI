@@ -21,8 +21,9 @@ public class MenuHandler
         Console.WriteLine("\t2. Print one team's stats from all games this season.");
         Console.WriteLine("\t3. Print one team's stats from one game this season.");
         Console.WriteLine("\t0. Exit the NFL Game Stats Processor.");
-    } // need to modify
+    }
 
+    // Gets the user's input for the menu option
     public int getMenuChoice()
     {
         string input = Console.ReadLine();
@@ -31,7 +32,7 @@ public class MenuHandler
         return choice;
     }
 
-    // use convert and validate, also check that it's within bounds?
+    // Prompts for and gets team number for outputting stats
     public int getTeamNum()
     {
         Console.WriteLine("Enter the team number.");
@@ -40,7 +41,7 @@ public class MenuHandler
         return teamNum;
     }
 
-    // use convert and validate, also check that it's within bounds?
+    // Prompts for and gets game number for outputting stats
     public int getGameNum(int max)
     {
         Console.WriteLine("Enter the game number that you would like to view:");
@@ -49,6 +50,7 @@ public class MenuHandler
         return gameNum;
     }
 
+    // Converts an input to a int if possible, and checks if within range; reprompts if not an int within range
     private int convertAndValidateInt(string strInput, int min, int max)
     {
         int intOutput;
@@ -64,9 +66,10 @@ public class MenuHandler
 
     }
 
+    // Prints the heading for printing out all teamss records
     public void printRecordHeading()
     {
-        Console.WriteLine("Printing records for each team this season.\n"); // would be cool to figure out which team is which number?
+        Console.WriteLine("Printing records for each team this season.\n");
         string strFormat = String.Format("{0,13}:{1,3} -{2,3} -{3,3}", "TEAM", "W", "L", "T");
         Console.WriteLine(strFormat);
         Console.WriteLine("---------------------------");

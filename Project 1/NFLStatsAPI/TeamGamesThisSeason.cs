@@ -38,7 +38,7 @@ public class TeamGamesThisSeason
             Console.WriteLine($"Error: {ex.Message}");
         }
 
-        setTeamName(); // Determines which team these stats are about
+        setTeamName(); // Determines which team these stats are about, sets the teamName
     }
 
 
@@ -59,6 +59,7 @@ public class TeamGamesThisSeason
         _jsonFile.MatchUpStats[gameNum - 1].printStats();
     }
 
+    // Calulates and prints the record (wins, losses, and ties) for this team
     public void PrintTeamRecord()
     {
         int wins = 0;
@@ -83,6 +84,7 @@ public class TeamGamesThisSeason
         Console.WriteLine(strFormat);
     }
 
+    // Determines and sets the teamName based on which team name occurs in multiple records
     private void setTeamName()
     {
         if (_jsonFile.MatchUpStats[0].homeTeamName == _jsonFile.MatchUpStats[1].homeTeamName)
@@ -100,6 +102,7 @@ public class TeamGamesThisSeason
         }
     }
 
+    // Gets the number of games for this team this season, used as max
     public int getNumOfGames()
     {
         return _jsonFile.MatchUpStats.Count();

@@ -15,8 +15,7 @@ public class GameStats
     public string date { get; set; }
 
 
-    // Prints formatted statistics for the matchup, displaying various in-game metrics
-    // for both the home and visiting teams.
+    // Prints formatted statistics for the matchup, displaying various in-game metrics for both the home and visiting teams.
     public void printStats()
     {
         string strFormat;
