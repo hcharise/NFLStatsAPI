@@ -26,7 +26,7 @@ public class MenuHandler
     public int getMenuChoice()
     {
         string input = Console.ReadLine();
-        int choice = convertAndValidateInt(input);
+        int choice = convertAndValidateInt(input, 0, 3);
         
         return choice;
     }
@@ -34,22 +34,32 @@ public class MenuHandler
     // use convert and validate, also check that it's within bounds?
     public int getTeamNum()
     {
-        Console.WriteLine("Enter the team number.\n");
+        Console.WriteLine("Enter the team number.");
         string input = Console.ReadLine();
-        int.TryParse(input, out int teamNum);
+        int teamNum = convertAndValidateInt(input, 1, 32);
         return teamNum;
     }
 
-    private int convertAndValidateInt(string strInput)
+    // use convert and validate, also check that it's within bounds?
+    public int getGameNum(int max)
+    {
+        Console.WriteLine("Enter the game number that you would like to view:");
+        string input = Console.ReadLine();
+        int gameNum = convertAndValidateInt(input, 1, max);
+        return gameNum;
+    }
+
+    private int convertAndValidateInt(string strInput, int min, int max)
     {
         int intOutput;
 
-        // Validate user input
-        while (!int.TryParse(strInput, out intOutput))
+        // Validate user input - int and within min and max
+        while (!int.TryParse(strInput, out intOutput) || intOutput < min || intOutput > max)
         {
-            Console.WriteLine("Invalid input. Please enter a integer.");
+            Console.WriteLine($"Invalid input. Please enter a integer from {min} to {max}.");
             strInput = Console.ReadLine();
         }
+
         return intOutput;
 
     }

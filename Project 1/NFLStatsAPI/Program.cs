@@ -49,7 +49,6 @@ class Program
             await allTeamsThisSeason[i].LoadJsonData();
         }
 
-        // add while loop
         MenuHandler mainMenu = new MenuHandler();
 
         mainMenu.ShowMenu();
@@ -68,10 +67,13 @@ class Program
                     }
                     break; 
                 case 2:
-                    allTeamsThisSeason[mainMenu.getTeamNum()].PrintAllStats();
+                    allTeamsThisSeason[mainMenu.getTeamNum() - 1].PrintAllStats();
                     break; 
                 case 3:
-                    allTeamsThisSeason[mainMenu.getTeamNum()].PrintSpecificGameStats();
+                    int teamIndex = mainMenu.getTeamNum() - 1;
+                    int numOfGames = allTeamsThisSeason[teamIndex].getNumOfGames();
+                    int gameNum = mainMenu.getGameNum(numOfGames);
+                    allTeamsThisSeason[teamIndex].PrintSpecificGameStats(gameNum);
                     break;
                 default:
                     Console.WriteLine("Not a valid menu choice.");

@@ -1,4 +1,7 @@
-﻿/// <summary>
+﻿
+using System.Reflection.Metadata.Ecma335;
+
+/// <summary>
 /// Serves as the root object for deserialized JSON data, containing a list of matchup statistics.
 /// This class acts as a wrapper for multiple `MatchUpStats` instances.
 /// </summary>
@@ -35,7 +38,7 @@ public class TeamGamesThisSeason
             Console.WriteLine($"Error: {ex.Message}");
         }
 
-        setTeamName();
+        setTeamName(); // Determines which team these stats are about
     }
 
 
@@ -50,20 +53,10 @@ public class TeamGamesThisSeason
     }
 
     /// Prompts the user to enter a specific game number and prints the corresponding statistics.
-    public void PrintSpecificGameStats()
+    public void PrintSpecificGameStats(int gameNum)
     {
-        Console.WriteLine("Enter the game number that you would like to view:");
-        string input = Console.ReadLine();
-
-        if (int.TryParse(input, out int gameNum) && gameNum > 0 && gameNum <= _jsonFile.MatchUpStats.Count)
-        {
-            Console.WriteLine($"Here are the stats for team {_teamNum} from game {gameNum}!\n", gameNum);
-            _jsonFile.MatchUpStats[gameNum - 1].printStats();
-        }
-        else
-        {
-            Console.WriteLine("Invalid game number. Please enter a number between 1 and {0}.", _jsonFile.MatchUpStats.Count);
-        }
+        Console.WriteLine($"Here are the stats for team {_teamNum} from game {gameNum}!\n", gameNum);
+        _jsonFile.MatchUpStats[gameNum - 1].printStats();
     }
 
     public void PrintTeamRecord()
@@ -105,8 +98,15 @@ public class TeamGamesThisSeason
         {
             teamName = _jsonFile.MatchUpStats[0].visTeamName;
         }
-
     }
+
+    public int getNumOfGames()
+    {
+        return _jsonFile.MatchUpStats.Count();
+    }
+
 }
+
+
 
 
