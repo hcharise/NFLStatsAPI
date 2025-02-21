@@ -3,11 +3,14 @@
 /// This class initializes dependencies, loads game data, and starts the menu handler.
 /// </summary>
 ///  
-/// PHASE 2
+/// MAINTENANCE HISTORY
+/// Phase 2
+///  - Added ability to load stats from all 32 teams for a given season.
+///  - Added option to print the record from all teams that season.
+///  - Refactored classes so that menuHandler, TeamGamesThisSeason, and main Program are separated more appropriately.
 /// 
-/// 
-/// PHASE 1
-/// Program takes URL from user, accesses data, then can print data for a single game, all games, or exit the program.
+/// Phase 1
+///  - Program takes URL from user, accesses data, then can print data for a single game, all games, or exit the program.
 /// 
 /// 
 /// TO DO:
@@ -27,7 +30,6 @@ using System.Threading.Tasks;
 /// The entry point for the NFL Game Stats Processor.
 /// This class initializes necessary components and starts the menu interface.
 /// </summary>
-/// 
 
 class Program
 {
@@ -39,47 +41,53 @@ class Program
         // Initialize the JSON handler, responsible for fetching and deserializing data
         JsonHandler jsonHandler = new JsonHandler();
 
-        // Array to hold all team's full stats for the current season
+        // Array to hold all teams' full stats for the current season
         TeamGamesThisSeason[] allTeamsThisSeason = new TeamGamesThisSeason[32];
 
         // Load each team's full stats from URL/Json into array of objects
         for (int i = 0; i < 32; i++)
         {
             allTeamsThisSeason[i] = new TeamGamesThisSeason(jsonHandler, i + 1);
-            await allTeamsThisSeason[i].LoadJsonData();
+            await allTeamsThisSeason[i].LoadJsonData(); // ADD QUEUE HERE
         }
 
+        // Initialize a menu handler for user input/output
         MenuHandler mainMenu = new MenuHandler();
 
+        // Display menu and get user's first choice
         mainMenu.ShowMenu();
         int menuChoice = mainMenu.getMenuChoice();
 
+        // Continue to display menu, get user's first choice, and execute choice until user exits
         while (menuChoice != 0)
         {
-            // Do the user's choice
+            // Execute the user's choice
             switch (menuChoice)
             {
-                case 1:
+                case 1: // Printing all teams' records
                     mainMenu.printRecordHeading();
                     for (int i = 0; i < 32; i++)
                     {
                         allTeamsThisSeason[i].PrintTeamRecord();
                     }
                     break; 
-                case 2:
+
+                case 2: // Printing one team's stats from every game
                     allTeamsThisSeason[mainMenu.getTeamNum() - 1].PrintAllStats();
                     break; 
-                case 3:
+
+                case 3: // Printing one team's stats from one game
                     int teamIndex = mainMenu.getTeamNum() - 1;
                     int numOfGames = allTeamsThisSeason[teamIndex].getNumOfGames();
                     int gameNum = mainMenu.getGameNum(numOfGames);
                     allTeamsThisSeason[teamIndex].PrintSpecificGameStats(gameNum);
                     break;
+
                 default:
-                    Console.WriteLine("Not a valid menu choice.");
                     break;
             }
 
+            // Repeat menu to allow user another choice
             mainMenu.ShowMenu();
             menuChoice = mainMenu.getMenuChoice();
 

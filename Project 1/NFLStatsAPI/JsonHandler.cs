@@ -10,6 +10,7 @@ public class JsonHandler
 {
     public async Task<TeamGamesThisSeason> FetchAndDeserializeJson(string url)
     {
+        // Attempt to load and deserialize the json from the URL
         try
         {
             using (HttpClient client = new HttpClient())

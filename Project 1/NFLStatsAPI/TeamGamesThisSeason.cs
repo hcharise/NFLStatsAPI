@@ -3,17 +3,17 @@ using System.Reflection.Metadata.Ecma335;
 
 /// <summary>
 /// Serves as the root object for deserialized JSON data, containing a list of matchup statistics.
-/// This class acts as a wrapper for multiple `MatchUpStats` instances.
+/// This class acts as a wrapper for multiple `AllGamesStats` instances.
 /// </summary>
 
 public class TeamGamesThisSeason
 {
-    public List<GameStats> MatchUpStats { get; set; }
+    public List<GameStats> AllGamesStats { get; set; }
     private const string URLBase = "https://sports.snoozle.net/search/nfl/searchHandler?fileType=inline&statType=teamStats&season=2020&teamName=";
     private readonly JsonHandler _jsonHandler; // Handles fetching and deserializing JSON data.
     private TeamGamesThisSeason _jsonFile; // Stores the deserialized game statistics.
-    private int _teamNum;
-    public string teamName;
+    private int _teamNum; // Stores the team's number from URL
+    public string teamName; // Stores the team's name
 
     // Initializes a new instance of the <see cref="MenuHandler"/> class.
     public TeamGamesThisSeason(JsonHandler jsonHandler, int teamNum)
@@ -42,21 +42,21 @@ public class TeamGamesThisSeason
     }
 
 
-    /// Prints statistics for all available matchups.
+    // Prints statistics for all available matchups.
     public void PrintAllStats()
     {
         Console.WriteLine($"Here are all the stats for team {_teamNum} this season!\n");
-        foreach (var matchUpStat in _jsonFile.MatchUpStats)
+        foreach (var matchUpStat in _jsonFile.AllGamesStats)
         {
             matchUpStat.printStats();
         }
     }
 
-    /// Prompts the user to enter a specific game number and prints the corresponding statistics.
+    // Prompts the user to enter a specific game number and prints the corresponding statistics.
     public void PrintSpecificGameStats(int gameNum)
     {
         Console.WriteLine($"Here are the stats for team {_teamNum} from game {gameNum}!\n", gameNum);
-        _jsonFile.MatchUpStats[gameNum - 1].printStats();
+        _jsonFile.AllGamesStats[gameNum - 1].printStats();
     }
 
     // Calulates and prints the record (wins, losses, and ties) for this team
@@ -66,7 +66,7 @@ public class TeamGamesThisSeason
         int losses = 0;
         int ties = 0;
 
-        foreach (GameStats game in _jsonFile.MatchUpStats)
+        foreach (GameStats game in _jsonFile.AllGamesStats)
         {
             if (game.homeStats.score > game.visStats.score)
             {
@@ -87,25 +87,25 @@ public class TeamGamesThisSeason
     // Determines and sets the teamName based on which team name occurs in multiple records
     private void setTeamName()
     {
-        if (_jsonFile.MatchUpStats[0].homeTeamName == _jsonFile.MatchUpStats[1].homeTeamName)
+        if (_jsonFile.AllGamesStats[0].homeTeamName == _jsonFile.AllGamesStats[1].homeTeamName)
         {
-            teamName = _jsonFile.MatchUpStats[0].homeTeamName;
-        } else if (_jsonFile.MatchUpStats[0].homeTeamName == _jsonFile.MatchUpStats[1].visTeamName)
+            teamName = _jsonFile.AllGamesStats[0].homeTeamName;
+        } else if (_jsonFile.AllGamesStats[0].homeTeamName == _jsonFile.AllGamesStats[1].visTeamName)
         {
-            teamName = _jsonFile.MatchUpStats[0].homeTeamName;
-        } else if (_jsonFile.MatchUpStats[0].visTeamName == _jsonFile.MatchUpStats[1].homeTeamName)
+            teamName = _jsonFile.AllGamesStats[0].homeTeamName;
+        } else if (_jsonFile.AllGamesStats[0].visTeamName == _jsonFile.AllGamesStats[1].homeTeamName)
         {
-            teamName = _jsonFile.MatchUpStats[0].visTeamName;
-        } else if (_jsonFile.MatchUpStats[0].visTeamName == _jsonFile.MatchUpStats[1].visTeamName)
+            teamName = _jsonFile.AllGamesStats[0].visTeamName;
+        } else if (_jsonFile.AllGamesStats[0].visTeamName == _jsonFile.AllGamesStats[1].visTeamName)
         {
-            teamName = _jsonFile.MatchUpStats[0].visTeamName;
+            teamName = _jsonFile.AllGamesStats[0].visTeamName;
         }
     }
 
     // Gets the number of games for this team this season, used as max
     public int getNumOfGames()
     {
-        return _jsonFile.MatchUpStats.Count();
+        return _jsonFile.AllGamesStats.Count();
     }
 
 }

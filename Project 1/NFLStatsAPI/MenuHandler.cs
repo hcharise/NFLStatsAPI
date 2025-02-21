@@ -11,9 +11,7 @@ using static System.Net.WebRequestMethods;
 
 public class MenuHandler
 {
-
-
-    /// Displays the main menu and handles user input to navigate between options.
+    // Displays the main menu.
     public void ShowMenu()
     {
         Console.WriteLine("\nChoose an option by entering the number:");
@@ -23,7 +21,7 @@ public class MenuHandler
         Console.WriteLine("\t0. Exit the NFL Game Stats Processor.");
     }
 
-    // Gets the user's input for the menu option
+    // Gets the user's input for their menu choice
     public int getMenuChoice()
     {
         string input = Console.ReadLine();
@@ -32,7 +30,7 @@ public class MenuHandler
         return choice;
     }
 
-    // Prompts for and gets team number for outputting stats
+    // Prompts for and gets user's input for team number
     public int getTeamNum()
     {
         Console.WriteLine("Enter the team number.");
@@ -41,7 +39,7 @@ public class MenuHandler
         return teamNum;
     }
 
-    // Prompts for and gets game number for outputting stats
+    // Prompts for and gets user's input for game number
     public int getGameNum(int max)
     {
         Console.WriteLine("Enter the game number that you would like to view:");
@@ -50,7 +48,7 @@ public class MenuHandler
         return gameNum;
     }
 
-    // Converts an input to a int if possible, and checks if within range; reprompts if not an int within range
+    // Converts an input to a int (if possible) and checks if within range; reprompts if not an int within range
     private int convertAndValidateInt(string strInput, int min, int max)
     {
         int intOutput;
@@ -66,7 +64,7 @@ public class MenuHandler
 
     }
 
-    // Prints the heading for printing out all teamss records
+    // Prints the heading for printing out all teams' records
     public void printRecordHeading()
     {
         Console.WriteLine("Printing records for each team this season.\n");
