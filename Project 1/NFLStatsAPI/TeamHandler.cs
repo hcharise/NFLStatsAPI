@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 public class TeamHandler
 {
-    private const string URLBase = "https://sports.snoozle.net/search/nfl/searchHandler?fileType=inline&statType=teamStats&season=2020&TeamName=";
+    private const string URLBase = "https://sports.snoozle.net/search/nfl/searchHandler?fileType=inline&statType=teamStats&season=2020&teamName=";
     private readonly JsonHandler _jsonHandler; // Handles fetching and deserializing JSON data.
     private TeamMatchUpsThisSeason _matchUpsThisSeason; // Stores the deserialized match up statistics.
     private int _teamNum; // Stores the team's number from URL
@@ -44,9 +44,9 @@ public class TeamHandler
     public void PrintAllStats()
     {
         Console.WriteLine($"Here are all the stats for team {_teamNum} this season!\n");
-        foreach (var matchUpStat in matchUpsThisSeason.matchUpStats)
+        foreach (var matchUpStat in _matchUpsThisSeason.matchUpStats)
         {
-            matchUpStat.printStats();
+            matchUpStat.PrintStats();
         }
     }
 

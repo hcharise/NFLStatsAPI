@@ -7,7 +7,7 @@
 /// Phase 2
 ///  - Added ability to load stats from all 32 teams for a given season.
 ///  - Added option to print the record from all teams that season.
-///  - Refactored classes so that menuHandler, TeamMatchUpsThisSeason, and main Program are separated more appropriately.
+///  - Refactored classes so that menuHandler, TeamMatchUpsThisSeason/TeamHandler, and main Program are separated more appropriately.
 /// 
 /// Phase 1
 ///  - Program takes URL from user, accesses data, then can print data for a single match up, all match ups, or exit the program.
@@ -15,12 +15,9 @@
 /// 
 /// TO DO:
 ///  - Add a message queue implementation to regulate the requests going to your server
-///  - Update capitalization to be consistent
-///  - Add notes above about phase 2 changes
 ///  - Update/redo documentation - add a diagram that shows context? try to use C4 model?, where is message queue & how does it work
 ///  - Figure out why teams are numbered the way they are?
 ///  
-
 
 
 using System;

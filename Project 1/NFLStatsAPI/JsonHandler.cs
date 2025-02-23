@@ -33,7 +33,7 @@ public class JsonHandler
                 {
                     throw new Exception("The API response is not valid JSON or is empty.");
                 }
-
+               
                 // Deserialize the JSON into the Root object
                 return JsonConvert.DeserializeObject<TeamMatchUpsThisSeason>(jsonContent);
             }

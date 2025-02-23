@@ -42,7 +42,7 @@ public class MenuHandler
     // Prompts for and gets user's input for match up number
     public int GetMatchUpNum(int max)
     {
-        Console.WriteLine("Enter the match up number that you would like to view:");
+        Console.WriteLine("Enter the match up number that you would like to view.");
         string input = Console.ReadLine();
         int matchUpNum = ConvertAndValidateInt(input, 1, max);
         return matchUpNum;
