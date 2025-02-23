@@ -42,12 +42,12 @@ class Program
         JsonHandler jsonHandler = new JsonHandler();
 
         // Array to hold all teams' full stats for the current season
-        TeamGamesThisSeason[] allTeamsThisSeason = new TeamGamesThisSeason[32];
+        TeamHandler[] allTeamsThisSeason = new TeamHandler[32];
 
         // Load each team's full stats from URL/Json into array of objects
         for (int i = 0; i < 32; i++)
         {
-            allTeamsThisSeason[i] = new TeamGamesThisSeason(jsonHandler, i + 1);
+            allTeamsThisSeason[i] = new TeamHandler(jsonHandler, i + 1);
             await allTeamsThisSeason[i].LoadJsonData(); // ADD QUEUE HERE
         }
 
