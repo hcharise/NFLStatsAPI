@@ -43,7 +43,7 @@ public class TeamHandler
     // Prints statistics for all available matchups.
     public void PrintAllStats()
     {
-        Console.WriteLine($"Here are all the stats for team {_teamNum} this season!\n");
+        Console.WriteLine($"Here are all the stats for {TeamName} this season!\n");
         foreach (var matchUpStat in _matchUpsThisSeason.matchUpStats)
         {
             matchUpStat.PrintStats();
@@ -53,7 +53,7 @@ public class TeamHandler
     // Prompts the user to enter a specific match up number and prints the corresponding statistics.
     public void PrintSpecificMatchUpStats(int matchUpNum)
     {
-        Console.WriteLine($"Here are the stats for team {_teamNum} from matchUp {matchUpNum}!\n");
+        Console.WriteLine($"Here are the stats for {TeamName} from match up #{matchUpNum}!\n");
         _matchUpsThisSeason.matchUpStats[matchUpNum - 1].PrintStats();
     }
 
