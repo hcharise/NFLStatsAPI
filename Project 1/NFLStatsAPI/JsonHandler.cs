@@ -1,66 +1,84 @@
-﻿/// <summary>
-/// Handles fetching and deserializing JSON data from a given URL.
-/// This class is responsible for making HTTP requests, validating responses,
-/// and converting JSON into C# objects for further processing.
-/// </summary>
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System.Collections.Concurrent;
+using System.Threading;
 
 public class JsonHandler
 {
-    public async Task<TeamMatchUpsThisSeason> FetchAndDeserializeJson(string url)
+    private readonly HttpClient _client;
+    private readonly ConcurrentQueue<(string url, TaskCompletionSource<TeamMatchUpsThisSeason> tcs)> _requestQueue;
+    private readonly SemaphoreSlim _semaphore;
+    private readonly Task _processingTask;
+    private bool _isRunning;
+
+    public JsonHandler(int maxConcurrentRequests = 5)
     {
-        // Attempt to load and deserialize the json from the URL
-        try
+        _client = new HttpClient();
+        _requestQueue = new ConcurrentQueue<(string, TaskCompletionSource<TeamMatchUpsThisSeason>)>();
+        _semaphore = new SemaphoreSlim(maxConcurrentRequests);
+        _isRunning = true;
+        _processingTask = Task.Run(ProcessQueue);
+    }
+
+    public Task<TeamMatchUpsThisSeason> FetchAndDeserializeJson(string url)
+    {
+        if (string.IsNullOrWhiteSpace(url))
+            throw new ArgumentException("The URL cannot be null or empty.", nameof(url));
+
+        var tcs = new TaskCompletionSource<TeamMatchUpsThisSeason>();
+        _requestQueue.Enqueue((url, tcs)); // Enqueue URL with the TaskCompletionSource
+        return tcs.Task; // Return the Task to the caller
+    }
+
+    private async Task ProcessQueue()
+    {
+        while (_isRunning)
         {
-            using (HttpClient client = new HttpClient())
+            if (_requestQueue.TryDequeue(out var request)) // Dequeue a request
             {
-                // Validate the URL
-                if (string.IsNullOrWhiteSpace(url))
+                string url = request.url;
+                var tcs = request.tcs;
+
+                await _semaphore.WaitAsync(); // Limit concurrent requests
+                try
                 {
-                    throw new ArgumentException("The URL cannot be null or empty.", nameof(url));
+                    TeamMatchUpsThisSeason result = await FetchAndDeserializeJsonInternal(url);
+                    tcs.SetResult(result); // Resolve the task with the result
                 }
-
-                // Fetch the content from the URL
-                HttpResponseMessage response = await client.GetAsync(url);
-                response.EnsureSuccessStatusCode(); // Throws if status code is not 2xx
-
-                // Read and log the response content
-                string jsonContent = await response.Content.ReadAsStringAsync();
-
-                // Check if the response is empty or not JSON-like
-                if (string.IsNullOrWhiteSpace(jsonContent) || jsonContent.TrimStart().StartsWith("<"))
+                catch (Exception ex)
                 {
-                    throw new Exception("The API response is not valid JSON or is empty.");
+                    tcs.SetException(ex); // Pass the exception to the waiting task
                 }
-               
-                // Deserialize the JSON into the Root object
-                return JsonConvert.DeserializeObject<TeamMatchUpsThisSeason>(jsonContent);
+                finally
+                {
+                    _semaphore.Release();
+                }
+            }
+            else
+            {
+                await Task.Delay(100); // Avoid busy-waiting
             }
         }
-        catch (HttpRequestException ex)
+    }
+
+    private async Task<TeamMatchUpsThisSeason> FetchAndDeserializeJsonInternal(string url)
+    {
+        try
         {
-            // Handle network-related errors
-            Console.WriteLine($"Network error: {ex.Message}");
-            throw new Exception("There was a problem connecting to the server. Please try again later.", ex);
-        }
-        catch (JsonException ex)
-        {
-            // Handle JSON parsing errors
-            Console.WriteLine($"JSON error: {ex.Message}");
-            throw new Exception("The server response could not be parsed as valid JSON.", ex);
-        }
-        catch (ArgumentException ex)
-        {
-            // Handle invalid arguments like null or empty URLs
-            Console.WriteLine($"Invalid argument: {ex.Message}");
-            throw;
+            HttpResponseMessage response = await _client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+
+            string jsonContent = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<TeamMatchUpsThisSeason>(jsonContent);
         }
         catch (Exception ex)
         {
-            // Catch any other exceptions
-            Console.WriteLine($"An unexpected error occurred: {ex.Message}");
-            throw new Exception("An unexpected error occurred while processing your request.", ex);
+            Console.WriteLine($"Error fetching JSON from {url}: {ex.Message}");
+            throw;
         }
+    }
+
+    public void StopProcessing()
+    {
+        _isRunning = false;
     }
 }
