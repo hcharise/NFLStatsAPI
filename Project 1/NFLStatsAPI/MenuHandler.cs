@@ -22,34 +22,34 @@ public class MenuHandler
     }
 
     // Gets the user's input for their menu choice
-    public int getMenuChoice()
+    public int GetMenuChoice()
     {
         string input = Console.ReadLine();
-        int choice = convertAndValidateInt(input, 0, 3);
+        int choice = ConvertAndValidateInt(input, 0, 3);
         
         return choice;
     }
 
     // Prompts for and gets user's input for team number
-    public int getTeamNum()
+    public int GetTeamNum()
     {
         Console.WriteLine("Enter the team number.");
         string input = Console.ReadLine();
-        int teamNum = convertAndValidateInt(input, 1, 32);
+        int teamNum = ConvertAndValidateInt(input, 1, 32);
         return teamNum;
     }
 
     // Prompts for and gets user's input for match up number
-    public int getMatchUpNum(int max)
+    public int GetMatchUpNum(int max)
     {
         Console.WriteLine("Enter the match up number that you would like to view:");
         string input = Console.ReadLine();
-        int matchUpNum = convertAndValidateInt(input, 1, max);
+        int matchUpNum = ConvertAndValidateInt(input, 1, max);
         return matchUpNum;
     }
 
     // Converts an input to a int (if possible) and checks if within range; reprompts if not an int within range
-    private int convertAndValidateInt(string strInput, int min, int max)
+    private int ConvertAndValidateInt(string strInput, int min, int max)
     {
         int intOutput;
 
@@ -65,7 +65,7 @@ public class MenuHandler
     }
 
     // Prints the heading for printing out all teams' records
-    public void printRecordHeading()
+    public void PrintRecordHeading()
     {
         Console.WriteLine("Printing records for each team this season.\n");
         string strFormat = String.Format("{0,13}:{1,3} -{2,3} -{3,3}", "TEAM", "W", "L", "T");

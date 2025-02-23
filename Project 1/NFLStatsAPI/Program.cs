@@ -16,7 +16,6 @@
 /// TO DO:
 ///  - Add a message queue implementation to regulate the requests going to your server
 ///  - Update capitalization to be consistent
-///  - Update // to /// or vice versa
 ///  - Add notes above about phase 2 changes
 ///  - Update/redo documentation - add a diagram that shows context? try to use C4 model?, where is message queue & how does it work
 ///  - Figure out why teams are numbered the way they are?
@@ -56,7 +55,7 @@ class Program
 
         // Display menu and get user's first choice
         mainMenu.ShowMenu();
-        int menuChoice = mainMenu.getMenuChoice();
+        int menuChoice = mainMenu.GetMenuChoice();
 
         // Continue to display menu, get user's first choice, and execute choice until user exits
         while (menuChoice != 0)
@@ -65,7 +64,7 @@ class Program
             switch (menuChoice)
             {
                 case 1: // Printing all teams' records
-                    mainMenu.printRecordHeading();
+                    mainMenu.PrintRecordHeading();
                     for (int i = 0; i < 32; i++)
                     {
                         allTeamsThisSeason[i].PrintTeamRecord();
@@ -73,13 +72,13 @@ class Program
                     break; 
 
                 case 2: // Printing one team's stats from every match up
-                    allTeamsThisSeason[mainMenu.getTeamNum() - 1].PrintAllStats();
+                    allTeamsThisSeason[mainMenu.GetTeamNum() - 1].PrintAllStats();
                     break; 
 
                 case 3: // Printing one team's stats from one match up
-                    int teamIndex = mainMenu.getTeamNum() - 1;
-                    int numOfMatchUps = allTeamsThisSeason[teamIndex].getNumOfMatchUps();
-                    int matchUpNum = mainMenu.getMatchUpNum(numOfMatchUps);
+                    int teamIndex = mainMenu.GetTeamNum() - 1;
+                    int numOfMatchUps = allTeamsThisSeason[teamIndex].GetNumOfMatchUps();
+                    int matchUpNum = mainMenu.GetMatchUpNum(numOfMatchUps);
                     allTeamsThisSeason[teamIndex].PrintSpecificMatchUpStats(matchUpNum);
                     break;
 
@@ -89,7 +88,7 @@ class Program
 
             // Repeat menu to allow user another choice
             mainMenu.ShowMenu();
-            menuChoice = mainMenu.getMenuChoice();
+            menuChoice = mainMenu.GetMenuChoice();
 
         }
 

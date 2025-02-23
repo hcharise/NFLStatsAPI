@@ -16,7 +16,7 @@ public class MatchUpStats
 
 
     // Prints formatted statistics for the match up, displaying all in-match up metrics for both the home and visiting teams
-    public void printStats()
+    public void PrintStats()
     {
         string strFormat;
 
