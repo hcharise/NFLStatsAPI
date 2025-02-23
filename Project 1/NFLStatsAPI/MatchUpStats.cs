@@ -1,26 +1,26 @@
 ﻿/// <summary>
 /// Represents the statistics for a single matchup between two teams.
-/// This class holds details about the game, including team names, final score,
-/// and various in-game statistics for both home and visiting teams.
+/// This class holds details about the match up, including team names, final score,
+/// and various in-match up statistics for both home and visiting teams.
 /// </summary>
 
-public class GameStats
+public class MatchUpStats
 {
     public bool neutral { get; set; }
     public string visTeamName { get; set; }
-    public TeamStatsThisGame visStats { get; set; }
+    public TeamStatsThisMatchUp visStats { get; set; }
     public string homeTeamName { get; set; }
-    public TeamStatsThisGame homeStats { get; set; }
+    public TeamStatsThisMatchUp homeStats { get; set; }
     public bool isFinal { get; set; }
     public string date { get; set; }
 
 
-    // Prints formatted statistics for the game, displaying all in-game metrics for both the home and visiting teams
+    // Prints formatted statistics for the match up, displaying all in-match up metrics for both the home and visiting teams
     public void printStats()
     {
         string strFormat;
 
-        Console.WriteLine($"Game Statistics - {homeTeamName} vs. {visTeamName}");
+        Console.WriteLine($"Match Up Statistics - {homeTeamName} vs. {visTeamName}");
 
         strFormat = String.Format("{0,-11}{1, 11}", "Match Date:", date);
         Console.WriteLine(strFormat);
@@ -33,7 +33,7 @@ public class GameStats
 
         Console.WriteLine($"---------------------------------------------------------------------");
 
-        // Print various game statistics
+        // Print various match up statistics
         PrintStatRow("statIdCode", homeStats?.statIdCode, visStats?.statIdCode);
         PrintStatRow("gameCode", homeStats?.gameCode, visStats?.gameCode);
         PrintStatRow("teamCode", homeStats?.teamCode, visStats?.teamCode);

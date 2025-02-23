@@ -1,16 +1,16 @@
 ﻿/// <summary>
-/// Entry point for the NFL Game Stats Processor application.
-/// This class initializes dependencies, loads game data, and starts the menu handler.
+/// Entry point for the NFL Stats Processor application.
+/// This class initializes dependencies, loads match up data, and starts the menu handler.
 /// </summary>
 ///  
 /// MAINTENANCE HISTORY
 /// Phase 2
 ///  - Added ability to load stats from all 32 teams for a given season.
 ///  - Added option to print the record from all teams that season.
-///  - Refactored classes so that menuHandler, TeamGamesThisSeason, and main Program are separated more appropriately.
+///  - Refactored classes so that menuHandler, TeamMatchUpsThisSeason, and main Program are separated more appropriately.
 /// 
 /// Phase 1
-///  - Program takes URL from user, accesses data, then can print data for a single game, all games, or exit the program.
+///  - Program takes URL from user, accesses data, then can print data for a single match up, all match ups, or exit the program.
 /// 
 /// 
 /// TO DO:
@@ -27,7 +27,7 @@
 using System;
 using System.Threading.Tasks;
 /// <summary>
-/// The entry point for the NFL Game Stats Processor.
+/// The entry point for the NFL Stats Processor.
 /// This class initializes necessary components and starts the menu interface.
 /// </summary>
 
@@ -36,7 +36,7 @@ class Program
     public static async Task Main()
     {
         // Display welcome message
-        Console.WriteLine("Welcome to the NFL Game Stats Processor!\n");
+        Console.WriteLine("Welcome to the NFL Stats Processor!\n");
 
         // Initialize the JSON handler, responsible for fetching and deserializing data
         JsonHandler jsonHandler = new JsonHandler();
@@ -72,15 +72,15 @@ class Program
                     }
                     break; 
 
-                case 2: // Printing one team's stats from every game
+                case 2: // Printing one team's stats from every match up
                     allTeamsThisSeason[mainMenu.getTeamNum() - 1].PrintAllStats();
                     break; 
 
-                case 3: // Printing one team's stats from one game
+                case 3: // Printing one team's stats from one match up
                     int teamIndex = mainMenu.getTeamNum() - 1;
-                    int numOfGames = allTeamsThisSeason[teamIndex].getNumOfGames();
-                    int gameNum = mainMenu.getGameNum(numOfGames);
-                    allTeamsThisSeason[teamIndex].PrintSpecificGameStats(gameNum);
+                    int numOfMatchUps = allTeamsThisSeason[teamIndex].getNumOfMatchUps();
+                    int matchUpNum = mainMenu.getMatchUpNum(numOfMatchUps);
+                    allTeamsThisSeason[teamIndex].PrintSpecificMatchUpStats(matchUpNum);
                     break;
 
                 default:

@@ -1,10 +1,10 @@
 ﻿/// <summary>
-/// Represents the statistical performance of a single team in a game.
+/// Represents the statistical performance of a single team in a match up.
 /// This class includes data such as passing yards, rushing yards, penalties,
 /// turnovers, and other key performance metrics.
 /// </summary>
 
-public class TeamStatsThisGame
+public class TeamStatsThisMatchUp
 {
     public string statIdCode { get; set; }
     public string gameCode { get; set; }

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 public class JsonHandler
 {
-    public async Task<TeamGamesThisSeason> FetchAndDeserializeJson(string url)
+    public async Task<TeamMatchUpsThisSeason> FetchAndDeserializeJson(string url)
     {
         // Attempt to load and deserialize the json from the URL
         try
@@ -35,7 +35,7 @@ public class JsonHandler
                 }
 
                 // Deserialize the JSON into the Root object
-                return JsonConvert.DeserializeObject<TeamGamesThisSeason>(jsonContent);
+                return JsonConvert.DeserializeObject<TeamMatchUpsThisSeason>(jsonContent);
             }
         }
         catch (HttpRequestException ex)

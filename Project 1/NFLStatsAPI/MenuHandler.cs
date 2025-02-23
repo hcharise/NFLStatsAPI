@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// Manages user interactions with the command-line menu.
 /// This class is responsible for displaying menu options, processing user input, 
-/// and executing corresponding actions such as loading and displaying game statistics.
+/// and executing corresponding actions such as loading and displaying match up statistics.
 /// </summary>
 using Microsoft.VisualBasic.FileIO;
 using System;
@@ -16,9 +16,9 @@ public class MenuHandler
     {
         Console.WriteLine("\nChoose an option by entering the number:");
         Console.WriteLine("\t1. Print records from all teams this season.");
-        Console.WriteLine("\t2. Print one team's stats from all games this season.");
-        Console.WriteLine("\t3. Print one team's stats from one game this season.");
-        Console.WriteLine("\t0. Exit the NFL Game Stats Processor.");
+        Console.WriteLine("\t2. Print one team's stats from all match ups this season.");
+        Console.WriteLine("\t3. Print one team's stats from one match up this season.");
+        Console.WriteLine("\t0. Exit the NFL Stats Processor.");
     }
 
     // Gets the user's input for their menu choice
@@ -39,13 +39,13 @@ public class MenuHandler
         return teamNum;
     }
 
-    // Prompts for and gets user's input for game number
-    public int getGameNum(int max)
+    // Prompts for and gets user's input for match up number
+    public int getMatchUpNum(int max)
     {
-        Console.WriteLine("Enter the game number that you would like to view:");
+        Console.WriteLine("Enter the match up number that you would like to view:");
         string input = Console.ReadLine();
-        int gameNum = convertAndValidateInt(input, 1, max);
-        return gameNum;
+        int matchUpNum = convertAndValidateInt(input, 1, max);
+        return matchUpNum;
     }
 
     // Converts an input to a int (if possible) and checks if within range; reprompts if not an int within range

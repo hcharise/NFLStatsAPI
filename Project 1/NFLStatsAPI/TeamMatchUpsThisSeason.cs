@@ -3,12 +3,12 @@ using System.Reflection.Metadata.Ecma335;
 
 /// <summary>
 /// Serves as the root object for deserialized JSON data, containing a list of matchup statistics.
-/// This class acts as a wrapper for multiple `AllGamesStats` instances.
+/// This class acts as a wrapper for multiple `matchUpStats` instances.
 /// </summary>
 
-public class TeamGamesThisSeason
+public class TeamMatchUpsThisSeason
 {
-    public List<GameStats> AllGamesStats { get; set; }
+    public List<MatchUpStats> matchUpStats { get; set; }
 }
 
  

@@ -1,5 +1,6 @@
 ﻿
 using System.Reflection.Metadata.Ecma335;
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// </summary>
@@ -8,7 +9,7 @@ public class TeamHandler
 {
     private const string URLBase = "https://sports.snoozle.net/search/nfl/searchHandler?fileType=inline&statType=teamStats&season=2020&teamName=";
     private readonly JsonHandler _jsonHandler; // Handles fetching and deserializing JSON data.
-    private TeamGamesThisSeason gamesThisSeason; // Stores the deserialized game statistics.
+    private TeamMatchUpsThisSeason matchUpsThisSeason; // Stores the deserialized match up statistics.
     private int _teamNum; // Stores the team's number from URL
     public string teamName; // Stores the team's name
 
@@ -19,7 +20,7 @@ public class TeamHandler
         _teamNum = teamNum;
     }
 
-    // Prompts the user to enter a URL, fetches JSON data from it, and deserializes it into a <see cref="GameStatsCollection"/> object.
+    // Prompts the user to enter a URL, fetches JSON data from it, and deserializes it into a TeamMatchUpsThisSeason object.
     public async Task LoadJsonData()
     {
         string URL = URLBase + _teamNum;
@@ -27,7 +28,7 @@ public class TeamHandler
 
         try
         {
-            gamesThisSeason = await _jsonHandler.FetchAndDeserializeJson(URL);
+            matchUpsThisSeason = await _jsonHandler.FetchAndDeserializeJson(URL);
             Console.WriteLine("Stats retrieved successfully!\n");
         }
         catch (Exception ex)
@@ -43,17 +44,17 @@ public class TeamHandler
     public void PrintAllStats()
     {
         Console.WriteLine($"Here are all the stats for team {_teamNum} this season!\n");
-        foreach (var matchUpStat in gamesThisSeason.AllGamesStats)
+        foreach (var matchUpStat in matchUpsThisSeason.matchUpStats)
         {
             matchUpStat.printStats();
         }
     }
 
-    // Prompts the user to enter a specific game number and prints the corresponding statistics.
-    public void PrintSpecificGameStats(int gameNum)
+    // Prompts the user to enter a specific match up number and prints the corresponding statistics.
+    public void PrintSpecificMatchUpStats(int matchUpNum)
     {
-        Console.WriteLine($"Here are the stats for team {_teamNum} from game {gameNum}!\n", gameNum);
-        gamesThisSeason.AllGamesStats[gameNum - 1].printStats();
+        Console.WriteLine($"Here are the stats for team {_teamNum} from matchUp {matchUpNum}!\n");
+        matchUpsThisSeason.matchUpStats[matchUpNum - 1].printStats();
     }
 
     // Calulates and prints the record (wins, losses, and ties) for this team
@@ -63,13 +64,13 @@ public class TeamHandler
         int losses = 0;
         int ties = 0;
 
-        foreach (GameStats game in gamesThisSeason.AllGamesStats)
+        foreach (MatchUpStats matchUp in matchUpsThisSeason.matchUpStats)
         {
-            if (game.homeStats.score > game.visStats.score)
+            if (matchUp.homeStats.score > matchUp.visStats.score)
             {
                 wins++;
             }
-            else if (game.visStats.score > game.homeStats.score)
+            else if (matchUp.visStats.score > matchUp.homeStats.score)
             {
                 losses++;
             }
@@ -86,28 +87,28 @@ public class TeamHandler
     // Determines and sets the teamName based on which team name occurs in multiple records
     private void setTeamName()
     {
-        if (gamesThisSeason.AllGamesStats[0].homeTeamName == gamesThisSeason.AllGamesStats[1].homeTeamName)
+        if (matchUpsThisSeason.matchUpStats[0].homeTeamName == matchUpsThisSeason.matchUpStats[1].homeTeamName)
         {
-            teamName = gamesThisSeason.AllGamesStats[0].homeTeamName;
+            teamName = matchUpsThisSeason.matchUpStats[0].homeTeamName;
         }
-        else if (gamesThisSeason.AllGamesStats[0].homeTeamName == gamesThisSeason.AllGamesStats[1].visTeamName)
+        else if (matchUpsThisSeason.matchUpStats[0].homeTeamName == matchUpsThisSeason.matchUpStats[1].visTeamName)
         {
-            teamName = gamesThisSeason.AllGamesStats[0].homeTeamName;
+            teamName = matchUpsThisSeason.matchUpStats[0].homeTeamName;
         }
-        else if (gamesThisSeason.AllGamesStats[0].visTeamName == gamesThisSeason.AllGamesStats[1].homeTeamName)
+        else if (matchUpsThisSeason.matchUpStats[0].visTeamName == matchUpsThisSeason.matchUpStats[1].homeTeamName)
         {
-            teamName = gamesThisSeason.AllGamesStats[0].visTeamName;
+            teamName = matchUpsThisSeason.matchUpStats[0].visTeamName;
         }
-        else if (gamesThisSeason.AllGamesStats[0].visTeamName == gamesThisSeason.AllGamesStats[1].visTeamName)
+        else if (matchUpsThisSeason.matchUpStats[0].visTeamName == matchUpsThisSeason.matchUpStats[1].visTeamName)
         {
-            teamName = gamesThisSeason.AllGamesStats[0].visTeamName;
+            teamName = matchUpsThisSeason.matchUpStats[0].visTeamName;
         }
     }
 
-    // Gets the number of games for this team this season, used as max
-    public int getNumOfGames()
+    // Gets the number of match ups for this team this season, used as max
+    public int getNumOfMatchUps()
     {
-        return gamesThisSeason.AllGamesStats.Count();
+        return matchUpsThisSeason.matchUpStats.Count();
     }
 
 }
