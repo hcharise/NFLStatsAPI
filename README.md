@@ -9,7 +9,7 @@ This project was completed by Hannah Ashton in March 2025 for Syracuse CSE 681 S
 
 The overall structure consists of various classes and their interactions. Below is a high-level breakdown of the classes and their interactions.
 
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/2612fcaa-a205-4e53-a58f-ec688cb5d41d" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/2612fcaa-a205-4e53-a58f-ec688cb5d41d"/>
 
 ### Data Structures
 
@@ -52,7 +52,8 @@ API URL: [https://sports.snoozle.net/search/nfl/index.jsp?](https://sports.snooz
 ## Asynchronous/Multicore Computing
 
 To increase efficiency, the system uses asynchronous programming to fetch and format data, speeding the retrieval of the data from all 32 teams.
-![Screenshot 2025-04-08 120519](https://github.com/user-attachments/assets/2c681abe-6bd9-49b6-9620-8ecc5ed1710b)
+
+<img width="800" src="https://github.com/user-attachments/assets/2c681abe-6bd9-49b6-9620-8ecc5ed1710b"/>
 
 
 ## 📦 Features
@@ -64,8 +65,8 @@ To increase efficiency, the system uses asynchronous programming to fetch and fo
   - View detailed stats for all games of a selected team.
   - View specific matchup stats for a team in a specific game.
 - **Robust error handling** to gracefully manage invalid input.
-- <img width="900" alt="image" src="https://github.com/user-attachments/assets/77f094b3-dd0e-4571-8228-f5faf00ab2d1" />
-![Screenshot 2025-04-08 120828](https://github.com/user-attachments/assets/549c9524-2ec8-48c7-a920-10afc3a6e846)
+<img width="900" alt="image" src="https://github.com/user-attachments/assets/77f094b3-dd0e-4571-8228-f5faf00ab2d1" />
+<img width="600" src="https://github.com/user-attachments/assets/549c9524-2ec8-48c7-a920-10afc3a6e846"/>
 
 ## Installation
 
